@@ -5,6 +5,6 @@ Probably due to some incompatibility with certain hardware/devices with the nati
 
 Tested on Manjaro KDE using a standard headphone.
 
-Use: `bash reest_blue.bash`
+Use: `# bash reest_blue.bash`
 
 Thanks! =D
