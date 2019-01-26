@@ -51,8 +51,7 @@ f_unbl_dev() {
         echo -n "."
         if [[ "$(rfkill list)" != *" hci0: "* ]] ; then
             for (( i=0; i<$UNBL_DEV_TIME; i++ )) ; do
-            # NOTE: Dá tempo para o "rfkill" antes de tentar desbloquear! 
-            # By Questor
+            # NOTE: Dá tempo para o "rfkill" antes de tentar desbloquear. By Questor
                 echo -n "."
                 sleep 0.2
                 rfkill unblock bluetooth
@@ -72,8 +71,6 @@ f_unbl_dev() {
         echo ""
         f_restart_dev
     fi
-    # rfkill unblock bluetooth
-    # _timeout 2 l2ping -t 2 -c 1 $BT_DEVICE 2> /dev/null 1> /dev/null
 }
 
 f_wait_dev() {
@@ -162,7 +159,9 @@ while : ; do
     (
         set +b
         sleep $TEST_INTERVAL &
-        {read -e -r -p "Type \"f\" to force bluetooth re-establishment or \"q\" to quit (press \"Enter\" in $TEST_INTERVAL seconds): " COMMAND_VAL && echo "$COMMAND_VAL" 1> stdout_command_val} &
+        {
+            read -e -r -p "Type \"f\" to force bluetooth re-establishment or \"q\" to quit (press \"Enter\" in $TEST_INTERVAL seconds): " COMMAND_VAL && echo "$COMMAND_VAL" 1> stdout_command_val
+        } &
         wait -n
         kill `jobs -p`)
     COMMAND_VAL=$(cat stdout_command_val 2> /dev/null)
